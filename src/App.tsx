@@ -148,7 +148,7 @@ function App() {
                                 tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
                             }
                             return <Grid item>
-                                <Paper style={{padding:'10px'}}>
+                                <Paper style={{padding: '10px'}}>
                                     <TodoList key={t.id}
                                               id={t.id}
                                               title={t.title}
@@ -168,7 +168,6 @@ function App() {
                     }
                 </Grid>
             </Container>
-
         </>
     );
 }
