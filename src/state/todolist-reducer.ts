@@ -54,7 +54,6 @@ export const todolistReducer = (state: Array<TodoListType>, action: ActionsTypes
             }
             return [...state]
         }
-
         default:
             throw new Error('Error type')
     }
