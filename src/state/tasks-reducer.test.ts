@@ -140,4 +140,3 @@ test('new property with todolistId should be deleted', () => {
     expect(endState['todolistId2']).not.toBeDefined()
 })
 
-
