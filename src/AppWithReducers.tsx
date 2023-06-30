@@ -37,6 +37,7 @@ function AppWithReducers() {
         {id: todolistId2, title: 'TS', filter: 'completed'}
     ])
 
+    // @ts-ignore
     let [tasksObj, dispatchToTasksReducer] = useReducer(tasksReducer, {
         [todolistId1]: [
             {id: v1(), title: 'html&css', isDone: true},

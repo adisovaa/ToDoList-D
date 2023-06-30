@@ -27,7 +27,6 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-
 function AppWithRedux() {
     let todolistId1 = v1()
     let todolistId2 = v1()
@@ -37,6 +36,7 @@ function AppWithRedux() {
         {id: todolistId2, title: 'TS', filter: 'completed'}
     ])
 
+    // @ts-ignore
     let [tasksObj, dispatchToTasksReducer] = useReducer(tasksReducer, {
         [todolistId1]: [
             {id: v1(), title: 'html&css', isDone: true},
