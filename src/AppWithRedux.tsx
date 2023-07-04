@@ -35,18 +35,6 @@ function AppWithRedux() {
     const todolists = useSelector<AppRootState, Array<TodoListType>>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
 
-    // const removeTask = (id: string, todolistId: string) => {
-    //     dispatch(removeTaskAC(id, todolistId))
-    // }
-    // const addTask = (value: string, todolistId: string) => {
-    //     dispatch(addTaskAC(value, todolistId))
-    // }
-    // const changeStatus = (taskId: string, isDone: boolean, todolistId: string) => {
-    //     dispatch(changeTaskStatusAC(taskId, isDone, todolistId))
-    // }
-    // const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
-    //     dispatch(changeTaskTitleAC(taskId, newTitle, todolistId))
-    // }
 
     const changeTodolistTitle = (id: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(id, newTitle))
@@ -54,9 +42,9 @@ function AppWithRedux() {
     const changeFilter = (value: FilterValuesType, todoListId: string) => {
         dispatch(changeTodolistFilterAC(todoListId, value))
     }
-    // let removeTodolist = (todolistId: string) => {
-    //     dispatch(removeTodoListAC(todolistId))
-    // }
+    let removeTodolist = (todolistId: string) => {
+        dispatch(removeTodoListAC(todolistId))
+    }
 
     function addTodoList(title: string) {
         dispatch(addTodolistAC(title))
@@ -108,6 +96,7 @@ function AppWithRedux() {
                                               changeFilter={changeFilter}
                                               filter={t.filter}
                                               changeTodolistTitle={changeTodolistTitle}
+                                              removeTodolist={removeTodolist}
                                     />
                                 </Paper>
                             </Grid>
