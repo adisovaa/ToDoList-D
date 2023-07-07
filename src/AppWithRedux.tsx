@@ -1,7 +1,6 @@
-import React, {useReducer} from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, TodoList} from "./TodoList";
-import {v1} from 'uuid'
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -10,9 +9,7 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodoListAC,
-    todolistReducer
 } from "./state/todolist-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
 
@@ -29,26 +26,27 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function AppWithRedux() {
+export const AppWithRedux = () => {
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootState, Array<TodoListType>>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
 
-
-    const changeTodolistTitle = (id: string, newTitle: string) => {
+    const changeTodolistTitle = useCallback((id: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(id, newTitle))
-    }
-    const changeFilter = (value: FilterValuesType, todoListId: string) => {
-        dispatch(changeTodolistFilterAC(todoListId, value))
-    }
-    let removeTodolist = (todolistId: string) => {
-        dispatch(removeTodoListAC(todolistId))
-    }
+    }, [])
 
-    function addTodoList(title: string) {
+    const changeFilter = useCallback((value: FilterValuesType, todoListId: string) => {
+        dispatch(changeTodolistFilterAC(todoListId, value))
+    }, [])
+
+    const removeTodolist = useCallback((todolistId: string) => {
+        dispatch(removeTodoListAC(todolistId))
+    },[])
+
+    const addTodoList = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }
+    }, [])
 
     return (
         <>

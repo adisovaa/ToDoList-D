@@ -25,7 +25,7 @@ type PropsType = {
     removeTodolist: (todolistId: string) => void
 }
 
-export const TodoList = (props: PropsType) => {
+export const TodoList = React.memo((props: PropsType) => {
     const tasks = useSelector<AppRootState, Array<TaskType>>(state => state.tasks[props.id])
     const dispatch = useDispatch()
 
@@ -38,6 +38,15 @@ export const TodoList = (props: PropsType) => {
     const onAllClickHandler = () => props.changeFilter('all', props.id)
     const onActiveClickHandler = () => props.changeFilter('active', props.id)
     const onCompletedClickHandler = () => props.changeFilter('active', props.id)
+
+    const tasksForTodoList = props.task
+
+    if (props.filter === 'completed') {
+        tasksForTodoList = props.task.filter(t => !t.isDone)
+    }
+    if (props.filter === 'active') {
+        tasksForTodoList = props.task.filter(t => t.isDone)
+    }
 
     return (
         <div>
@@ -87,5 +96,4 @@ export const TodoList = (props: PropsType) => {
             </div>
         </div>
     );
-};
-
+})
